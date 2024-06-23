@@ -1,0 +1,58 @@
+{
+    "ts-node": {
+        "require": ["tsconfig-paths/register"],
+        "transpileOnly": true,
+        "files": true,
+        "compilerOptions": {
+            "skipDefaultLibCheck": true,
+            "module": "CommonJS",
+            "skipLibCheck": true,
+        },
+    },
+    "compileOnSave": true,
+    "compilerOptions": {
+        "alwaysStrict": true,
+        "emitDecoratorMetadata": true,
+        "experimentalDecorators": true,
+        "esModuleInterop": true,
+        "lib": ["es6", "es2018", "esnext"],
+        "outDir": "./dist",
+        "baseUrl": ".",
+        "types": [
+            "jest",
+            "reflect-metadata",
+            "node"
+        ],
+        "module": "nodenext",
+        "moduleResolution": "nodenext",
+        "noImplicitAny": false,
+        "strict": false,
+        "pretty": true,
+        "skipLibCheck": true,
+        "skipDefaultLibCheck": true,
+        "declaration": true,
+        "target": "es2018",
+        "allowSyntheticDefaultImports": true,
+        "resolveJsonModule": true,
+        "declarationMap": true,
+        "sourceMap": true,
+        "removeComments": true,
+        "noUncheckedIndexedAccess": true,
+        "paths": {
+            "@src": ["./src"],
+            "@core": ["./src/core"],
+            "@building-blocks": ["./src/building-blocks"],
+            "@interfaces": ["./src/interfaces"]
+        },
+    },
+    "exclude": [
+        "**/node_modules",
+        "**/node_modules/**/*.*",
+        "**/dist",
+        "**/tests",
+        "**/__tests__",
+        "**/__mocks__",
+        "**/swagger/*.ts",
+        "**/*.test.ts"
+    ]
+}

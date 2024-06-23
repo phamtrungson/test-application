@@ -1,0 +1,28 @@
+openapi: 3.0.0
+info:
+  title: Test Application API
+  version: 1.0.0
+  description: Test application API
+servers:
+  - url: http://localhost:5001
+paths:
+  /health:
+    get:
+      summary: Health check endpoint
+      tags:
+        - common
+      responses:
+        '200':
+          description: OK status
+components:
+  parameters:
+    entityId:
+      name: 'entityId'
+      in: 'path'
+      required: true
+      schema:
+          type: 'string'
+      description: 'Id of an Entity'
+tags:
+  - name: common
+    description: common functions
