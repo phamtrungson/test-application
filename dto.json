@@ -1,0 +1,159 @@
+{
+    "$schema": "http://json-schema.org/draft-07/schema#",
+    "definitions": {
+        "EntityPathParams": {
+            "properties": {
+                "entityId": {
+                    "type": "string"
+                }
+            },
+            "type": "object"
+        },
+        "OrderDTO": {
+            "properties": {
+                "buyerId": {
+                    "type": "string"
+                },
+                "id": {
+                    "type": "string"
+                },
+                "note": {
+                    "type": "string"
+                },
+                "orderItems": {
+                    "items": {
+                        "$ref": "#/definitions/OrderItemDTO"
+                    },
+                    "type": "array"
+                },
+                "orderStatus": {
+                    "$ref": "#/definitions/OrderStatusDTO"
+                },
+                "version": {
+                    "type": "number"
+                }
+            },
+            "type": "object"
+        },
+        "OrderInput": {
+            "properties": {
+                "buyerId": {
+                    "type": "string"
+                },
+                "note": {
+                    "type": "string"
+                },
+                "orderItems": {
+                    "items": {
+                        "$ref": "#/definitions/OrderItemInput"
+                    },
+                    "type": "array"
+                }
+            },
+            "type": "object"
+        },
+        "OrderItemDTO": {
+            "properties": {
+                "discount": {
+                    "type": "number"
+                },
+                "id": {
+                    "type": "string"
+                },
+                "productId": {
+                    "type": "string"
+                },
+                "productName": {
+                    "type": "string"
+                },
+                "unitPrice": {
+                    "type": "number"
+                },
+                "units": {
+                    "type": "number"
+                }
+            },
+            "type": "object"
+        },
+        "OrderItemInput": {
+            "properties": {
+                "discount": {
+                    "type": "number"
+                },
+                "productId": {
+                    "type": "string"
+                },
+                "productName": {
+                    "type": "string"
+                },
+                "unitPrice": {
+                    "type": "number"
+                },
+                "units": {
+                    "type": "number"
+                }
+            },
+            "type": "object"
+        },
+        "OrderResponse": {
+            "properties": {
+                "buyerId": {
+                    "type": "string"
+                },
+                "id": {
+                    "type": "string"
+                },
+                "note": {
+                    "type": "string"
+                },
+                "orderItems": {
+                    "items": {
+                        "$ref": "#/definitions/OrderItemDTO"
+                    },
+                    "type": "array"
+                },
+                "orderStatus": {
+                    "$ref": "#/definitions/OrderStatusDTO"
+                },
+                "version": {
+                    "type": "number"
+                }
+            },
+            "type": "object"
+        },
+        "OrderStatusDTO": {
+            "enum": [
+                "Submitted",
+                "AwaitingValidation",
+                "StockConfirmed",
+                "Paid",
+                "Shipped",
+                "Cancelled"
+            ],
+            "type": "string"
+        },
+        "OrdersQueryParams": {
+            "properties": {
+                "buyerId": {
+                    "type": "string"
+                }
+            },
+            "type": "object"
+        },
+        "OrdersResponse": {
+            "properties": {
+                "count": {
+                    "type": "number"
+                },
+                "data": {
+                    "items": {
+                        "$ref": "#/definitions/OrderDTO"
+                    },
+                    "type": "array"
+                }
+            },
+            "type": "object"
+        }
+    }
+}
+

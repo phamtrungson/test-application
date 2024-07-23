@@ -13,9 +13,9 @@ export enum ErrorId {
 export const DefaultMessages: { [k in ErrorId]: string; } = {
     [ErrorId.UNEXPECTED]: 'Some unexpected errors occurred',
     [ErrorId.DEFAULT_BUSINESS_ERROR]: 'Your request have something wrong',
-    [ErrorId.DEFAULT_BUSINESS_NOT_FOUND]: 'Requested {{resource}} {{name}} not found',
+    [ErrorId.DEFAULT_BUSINESS_NOT_FOUND]: 'Requested resource not found',
     [ErrorId.DEFAULT_BUSINESS_CONCURRENCY]: 'Your data have changed outside. Please reload page',
-    [ErrorId.DEFAULT_BUSINESS_VALIDATION]: 'Your request contains invalid parameter(s) {{params}}',
+    [ErrorId.DEFAULT_BUSINESS_VALIDATION]: 'Your request contains invalid parameter(s)',
 
     [ErrorId.NOT_AUTHENTICATED]: 'Wrong credentials provided',
     [ErrorId.NOT_AUTHORIZED]: 'You\'re not authorized',

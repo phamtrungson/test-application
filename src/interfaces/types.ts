@@ -1,3 +1,5 @@
 export const TYPES = {
-    CommonController: 'CommonController'
+    PrismaClient: 'PrismaClient',
+    OrderQueries: 'OrderQueries',
+    IOrderRepository: 'IOrderRepository',
 }

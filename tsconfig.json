@@ -41,8 +41,10 @@
         "paths": {
             "@src": ["./src"],
             "@core": ["./src/core"],
-            "@building-blocks": ["./src/building-blocks"],
-            "@interfaces": ["./src/interfaces"]
+            "@interfaces": ["./src/interfaces"],
+            "@domain": ["./src/domain"],
+            "@infra": ["./src/infrastructure"],
+            "@application": ["./src/main-application"],
         },
     },
     "exclude": [

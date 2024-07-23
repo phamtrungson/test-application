@@ -3,9 +3,9 @@ import 'dotenv/config';
 
 import { Server } from './server';
 
-export const main = async () => {
+export const main = () => {
     const server = new Server();
-    await server.start();
+    server.start();
 }
 
 main();

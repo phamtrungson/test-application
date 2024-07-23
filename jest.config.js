@@ -4,9 +4,11 @@ module.exports = {
     coverageDirectory: '.coverage',
     verbose: true,
     moduleNameMapper: {
-        "@building-blocks(.*)$": '<rootDir>/src/building-blocks$1',
         "@interfaces(.*)$": '<rootDir>/src/interfaces$1',
-        "@core(.*)$": '<rootDir>/src/interfaces$1'
+        "@core(.*)$": '<rootDir>/src/interfaces$1',
+        "@domain(.*)$": '<rootDir>/src/domain$1',
+        "@infra(.*)$": '<rootDir>/src/infrastructure$1',
+        "@application(.*)$": '<rootDir>/src/main-application$1',
     },
     // eslint-disable-next-line prettier/prettier
     collectCoverageFrom: [

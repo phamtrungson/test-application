@@ -1,23 +1,20 @@
-import { Application, json } from 'express';
-import { Container } from 'inversify';
-import cors from 'cors';
+import { BASE_TYPES, LoggingModule, ContainerProvider, ILogger } from '@core';
+import { TYPES } from '@interfaces';
+import { PrismaClient } from '@prisma/client';
 import compression from 'compression';
 import cookieParser from 'cookie-parser';
+import cors from 'cors';
+import { Application, json } from 'express';
+import { Container } from 'inversify';
 import { InversifyExpressServer } from 'inversify-express-utils';
-import { BASE_TYPES, BaseInfrastructureModule, ContainerProvider, ILogger } from '@building-blocks';
-import { loggingMiddleware } from './main-application';
-import errorMiddleware from './main-application/middleware/errorMiddleware';
+import { InfrastructureModule } from '@infra';
+import { ApplicationModule, errorMiddleware, loggingMiddleware } from '@application';
 
 export class Server {
     private app: Application;
     private container: Container;
     private logger: ILogger;
-
-    private _setupContainer() {
-        this.container = new Container();
-        this.container.load(BaseInfrastructureModule);
-        ContainerProvider.init(this.container);
-    }
+    private prismaClient: PrismaClient;
 
     constructor() {
         this._setupContainer();
@@ -38,11 +35,43 @@ export class Server {
         this.logger.debug('ENV: ', process.env);
     }
 
-    async start() {
+    start() {
+        this.startAsync().catch(async (error) => {
+            this.logger?.error(error.message);
+            console.error(error.message);
+            await this.prismaClient?.$disconnect();
+        })
+    }
+
+    private async startAsync() {
         console.info('...');
         this.logger.info('🚀 Server is starting... 🚀');
+
+        await this._setupDatabase();
+
         this.app.listen(process.env.PORT, () => {
             this.logger.info(`Server is listening on the port ${process.env.PORT}`);
         });
+
+        this.logger.info('Server finish starting');
+    }
+
+    private _setupContainer() {
+        this.container = ContainerProvider.Container;
+        this.container.load(LoggingModule);
+        this.container.load(InfrastructureModule);
+        this.container.load(ApplicationModule);
+    }
+
+    private async _setupDatabase() {
+        this.prismaClient = this.container.get<PrismaClient>(TYPES.PrismaClient);
+        try {
+            this.logger.info('Connecting to DB...');
+            await this.prismaClient.$connect();
+            this.logger.info('Connected to DB...');
+        } catch (error) {
+            this.logger.error('Connect to DB error', error?.message);
+            throw error;
+        }
     }
 }

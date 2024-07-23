@@ -1,11 +1,10 @@
 import { NextFunction, Request, Response } from 'express';
-import { BASE_TYPES, ContainerProvider, ILogger } from '@building-blocks';
+import { BASE_TYPES, ContainerProvider, ILogger } from '@core';
 import { nanoid } from 'nanoid';
 import { BusinessError, DefaultMessages, ErrorId, NotAuthenticatedError, NotAuthorizedError } from '@core';
 import { StatusCodes } from 'http-status-codes';
 
-
-function errorMiddleware(error: any, request: Request, response: Response, next: NextFunction) {
+export function errorMiddleware(error: any, request: Request, response: Response, next: NextFunction) {
     const status = error.status || StatusCodes.INTERNAL_SERVER_ERROR;
     let message = error.message || DefaultMessages[ErrorId.UNEXPECTED];
     let errorId = error.errorId || ErrorId.UNEXPECTED;
@@ -38,5 +37,3 @@ function errorMiddleware(error: any, request: Request, response: Response, next:
             errorData,
         });
 }
-
-export default errorMiddleware;

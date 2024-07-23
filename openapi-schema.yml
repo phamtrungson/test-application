@@ -1,0 +1,79 @@
+
+openapi: 3.0.0
+info:
+  title: Test Application API
+  version: 1.0.0
+  description: Test application API
+servers:
+  - url: http://localhost:5001
+paths:
+  /health:
+    get:
+      summary: Health check endpoint
+      tags:
+        - common
+      responses:
+        '200':
+          description: OK status
+  /api/v1/orders:
+    get:
+      summary: Get orders
+      tags:
+        - orders
+      parameters:
+        - name: OrdersQueryParams
+          in: query       
+          schema:
+            $ref: 'dto.json/#/definitions/OrdersQueryParams'
+      responses:
+        '200':
+          description: OK status
+          content:
+            application/json:
+              schema:
+                $ref: 'dto.json/#/definitions/OrdersResponse'
+    post:
+      summary: Create an order
+      tags:
+        - orders
+      requestBody:
+        required: true
+        content:
+            application/json:
+              schema:
+                $ref: 'dto.json/#/definitions/OrderInput'
+      responses:
+        '200':
+          description: OK status
+          content:
+            application/json:
+              schema:
+                $ref: 'dto.json/#/definitions/OrderResponse'
+  /api/v1/orders/{entityId}:
+    get:
+      summary: Get an order by Id
+      parameters:
+        - $ref: '#/components/parameters/entityId'
+      tags:
+        - orders
+      responses:
+        '200':
+          description: OK status
+          content:
+            application/json:
+              schema:
+                $ref: 'dto.json/#/definitions/OrderResponse'
+components:
+  parameters:
+    entityId:
+      name: 'entityId'
+      in: 'path'
+      required: true
+      schema:
+          type: 'string'
+      description: 'Id of an Entity'
+tags:
+  - name: common
+    description: Common APIs
+  - name: orders
+    description: Orders APIs

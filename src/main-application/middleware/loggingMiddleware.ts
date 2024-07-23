@@ -1,5 +1,5 @@
 import { Request, Response, NextFunction } from 'express';
-import { BASE_TYPES, ContainerProvider, ILogger } from '@building-blocks';
+import { BASE_TYPES, ContainerProvider, ILogger } from '@core';
 
 export function loggingMiddleware(request: Request, response: Response, next: NextFunction) {
     const logger = ContainerProvider.Container.getNamed<ILogger>(BASE_TYPES.ILogger, loggingMiddleware.name);
